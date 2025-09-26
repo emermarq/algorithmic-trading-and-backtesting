@@ -1,7 +1,6 @@
 from fastapi import FastAPI
+from app.api.v2 import backtest
 
-app = FastAPI()
+app = FastAPI(title="Trading API")
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+app.include_router(backtest.router, prefix="/backtests/run", tags=["backtest"])
